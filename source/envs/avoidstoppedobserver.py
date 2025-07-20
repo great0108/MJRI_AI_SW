@@ -25,7 +25,7 @@ class AvoidStoppedObserver(Env):
     def __init__(self):
         super().__init__()
         self.env_id = "FindAvoidObserver-v1"
-        self.total_timesteps = 100000
+        self.total_timesteps = 240000
         self.save_freq = 10000
         self.logging_freq = 1000
         self.feature_dim = 256
@@ -253,7 +253,7 @@ class AvoidStoppedObserver(Env):
         def make_env():
             return EnvAvoidObserver(
                 max_steps=self.max_step_length,
-                num_observers=300,
+                num_observers=800,
                 random_start=False,
                 move_observer=True,
             )
@@ -286,7 +286,7 @@ class AvoidStoppedObserver(Env):
             initial_n=10, # starting n-step
             final_n=3, # final n-step
             num_buckets=51, # buckets in distributional RL
-            reset_freq=40000, # reset schedule in grad step
+            reset_freq=60000, # reset schedule in grad step
             replay_ratio=2, # update number in one step
             weight_decay=0.1, # weight decay in optimizer,
             epsilon=0,
@@ -294,10 +294,10 @@ class AvoidStoppedObserver(Env):
             stackFrame=False
         )
 
-        # model_path = r""
-        # if os.path.exists(model_path):
-        #     print(f"기존 모델을 불러옵니다: {model_path}")
-        #     agent.load(model_path)
+        model_path = r"C:\Users\onlyb\Documents\RL project\MJRI_AI_SW\avoid_observer\bbf_avoid_observer.pth"
+        if os.path.exists(model_path):
+            print(f"기존 모델을 불러옵니다: {model_path}")
+            agent.load(model_path)
 
         agent.learn(
             total_timesteps=self.total_timesteps,
@@ -459,7 +459,7 @@ class AvoidStoppedObserver(Env):
         def make_env():
             return EnvAvoidObserver(
                 max_steps=self.max_step_length,
-                num_observers=300,
+                num_observers=800,
                 random_start=False,
                 move_observer=True,
             )
